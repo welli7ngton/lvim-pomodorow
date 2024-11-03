@@ -1,4 +1,4 @@
-local config = require("src.config")
+local config = require("pomodorow.config")
 
 local M = {}
 
@@ -55,14 +55,14 @@ end
 
 vim.api.nvim_create_user_command('StartPomodoro',
   function()
-    require('src.init').start_timer()
+    require('pomodorow').start_timer()
   end,
   {}
 )
 
 vim.api.nvim_create_user_command('StopPomodoro',
   function()
-    require('src.init').stop_timer()
+    require('pomodorow').stop_timer()
   end,
   {}
 )
