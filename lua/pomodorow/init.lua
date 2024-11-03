@@ -1,15 +1,19 @@
-local config = require("pomodorow.config")
 local utils = require("pomodorow.utils")
 
 local M = {}
 
 local timer = nil
 
-M.work_time = config.work_time or (25 * 60)
-M.break_time = config.break_time or (5 * 60)
 M.in_break = false
 
 M.remaining_time = M.work_time
+
+M.visible_remaining_time = false
+
+function M.setup(work_time, break_time)
+  M.work_time = (work_time * 60) or (25 * 60)
+  M.break_time = (break_time * 60) or (5 * 60)
+end
 
 function M.start_timer()
   if timer then
@@ -25,7 +29,10 @@ function M.start_timer()
     M.remaining_time = M.remaining_time - 1
     local mins, secs = utils.get_minutes_and_seconds(M.remaining_time)
 
-    -- vim.notify("echo 'tempo restante: " .. string.format("%02d:%02d", mins, secs) .. "'")
+    if M.visible_remaining_time then
+      vim.notify("Remaining time: " .. mins .. ":" .. secs, vim.log.levels.INFO)
+    end
+
     if timer and M.remaining_time <= 0 then
       timer:stop()
       timer:close()
@@ -61,6 +68,10 @@ function M.show_timer()
   end
 end
 
+function M.toggle_time_visibility()
+  M.visible_remaining_time = not M.visible_remaining_time
+end
+
 vim.api.nvim_create_user_command('PomodoroStart',
   function()
     require('pomodorow').start_timer()
@@ -78,6 +89,13 @@ vim.api.nvim_create_user_command('PomodoroStop',
 vim.api.nvim_create_user_command('PomodoroReamainingTime',
   function()
     require('pomodorow').show_timer()
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command('PomodoroToggleTimeVisibility',
+  function()
+    require('pomodorow').toggle_time_visibility()
   end,
   {}
 )
