@@ -1,44 +1,43 @@
 local config = require("pomodorow.config")
+local utils = require("pomodorow.utils")
 
 local M = {}
 
 local timer = nil
 
-local work_time = config.work_time or (25 * 60)
-local break_time = config.break_time or (5 * 60)
-local in_break = false
+M.work_time = config.work_time or (25 * 60)
+M.break_time = config.break_time or (5 * 60)
+M.in_break = false
+
+M.remaining_time = M.work_time
 
 function M.start_timer()
   if timer then
-    print("Timer is running")
+    vim.notify("Timer is running plever", vim.log.levels.INFO)
     return
   end
 
+  M.remaining_time = M.in_break and M.break_time or M.work_time
+
   timer = vim.loop.new_timer()
-  local remaining_time = in_break or break_time or work_time
 
   timer:start(0, 1000, vim.schedule_wrap(function()
-    remaining_time = remaining_time - 1
-    local mins = math.floor(remaining_time / 60)
-    local secs = remaining_time % 60
+    M.remaining_time = M.remaining_time - 1
+    local mins, secs = utils.get_minutes_and_seconds(M.remaining_time)
 
-    vim.cmd("echo 'Tempo restante: " .. string.format("%02d:%02d", mins, secs) .. "'")
-
-    if timer and remaining_time <= 0 then
+    -- vim.notify("echo 'tempo restante: " .. string.format("%02d:%02d", mins, secs) .. "'")
+    if timer and M.remaining_time <= 0 then
       timer:stop()
       timer:close()
       timer = nil
 
-      in_break = not in_break
-      if in_break then
-        vim.echo("Break time!")
+      M.in_break = not M.in_break
+      if M.in_break then
         vim.notify("Break time!", vim.log.levels.INFO)
       else
-        vim.echo("Work time!")
         vim.notify("Work time!", vim.log.levels.INFO)
       end
     end
-    M.start_timer()
   end))
 end
 
@@ -47,22 +46,38 @@ function M.stop_timer()
     timer:stop()
     timer:close()
     timer = nil
-    print("Timer stopped")
+    vim.notify("Timer stopped", vim.log.levels.INFO)
   else
-    print("Timer is not running")
+    vim.notify("Timer is not running", vim.log.levels.INFO)
   end
 end
 
-vim.api.nvim_create_user_command('StartPomodoro',
+function M.show_timer()
+  if timer then
+    local mins, secs = utils.get_minutes_and_seconds(M.remaining_time)
+    vim.notify("Remaining time: " .. mins .. ":" .. secs, vim.log.levels.INFO)
+  else
+    vim.notify("No timer is running", vim.log.levels.INFO)
+  end
+end
+
+vim.api.nvim_create_user_command('PomodoroStart',
   function()
     require('pomodorow').start_timer()
   end,
   {}
 )
 
-vim.api.nvim_create_user_command('StopPomodoro',
+vim.api.nvim_create_user_command('PomodoroStop',
   function()
     require('pomodorow').stop_timer()
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command('PomodoroReamainingTime',
+  function()
+    require('pomodorow').show_timer()
   end,
   {}
 )
