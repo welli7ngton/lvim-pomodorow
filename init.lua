@@ -1,11 +1,11 @@
-local config = require("lvim-pomodoro.config")
+local config = require("config")
 
 local M = {}
 
 local timer = nil
 
-local work_time = config.work_time or 25 * 60
-local break_time = config.break_time or 5 * 60
+local work_time = config.work_time or (25 * 60)
+local break_time = config.break_time or (5 * 60)
 local in_break = false
 
 function M.start_timer()
