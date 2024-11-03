@@ -1,9 +1,11 @@
+local config = require("lvim-pomodoro.config")
+
 local M = {}
 
 local timer = nil
 
-local work_time = 25 * 60
-local break_time = 5 * 60
+local work_time = config.work_time or 25 * 60
+local break_time = config.break_time or 5 * 60
 local in_break = false
 
 function M.start_timer()
@@ -52,8 +54,8 @@ function M.stop_timer()
 end
 
 vim.cmd [[
-  command! StartPomodoro lua require('lvim-pomodorow').start_timer()
-  command! StopPomodoro lua require('lvim-pomodorow').start_timer()
+  command! StartPomodoro lua require('lvim-pomodorow.init').start_timer()
+  command! StopPomodoro lua require('lvim-pomodorow.init').start_timer()
 ]]
 
 return M
