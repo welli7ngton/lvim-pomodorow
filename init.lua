@@ -54,8 +54,8 @@ function M.stop_timer()
 end
 
 vim.cmd [[
-  command! StartPomodoro lua require('lvim-pomodorow.init').start_timer()
-  command! StopPomodoro lua require('lvim-pomodorow.init').start_timer()
+  command! StartPomodoro lua require 'lvim-pomodorow.init'.start_timer()
+  command! StopPomodoro lua require 'lvim-pomodorow.init'.start_timer()
 ]]
 
 return M
