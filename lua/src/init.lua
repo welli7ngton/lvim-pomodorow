@@ -1,4 +1,3 @@
-print("oioioi")
 local config = require("src.config")
 
 local M = {}
