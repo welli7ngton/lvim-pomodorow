@@ -10,7 +10,7 @@ local in_break = false
 
 function M.start_timer()
   if timer then
-    print("Timmer is running")
+    print("Timer is running")
     return
   end
 
@@ -47,9 +47,9 @@ function M.stop_timer()
     timer:stop()
     timer:close()
     timer = nil
-    print("Timmer stopped")
+    print("Timer stopped")
   else
-    print("Timmer is not running")
+    print("Timer is not running")
   end
 end
 
