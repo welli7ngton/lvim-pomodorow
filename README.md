@@ -32,11 +32,11 @@ Você pode ajustar os tempos de trabalho e intervalo conforme suas preferências
 ## Uso
 O lvim-pomodorow fornece os seguintes comandos para gerenciar suas sessões Pomodoro:
 
-- ´PomodoroStart´: Inicia uma nova sessão Pomodoro.
-- ´PomodoroStop´: Encerra a sessão atual.
-- ´PomodoroRemainingTime´: Mostra o tempo atual.
-- ´PomodoroToggleTimeVisibility´: Alterna entre mostrar sempre e não mostrar o tempo atual.
-- ´PomodoroSetWorkAndBreak´: Adiciona um tempo personalizado para pausa e trabalho.
+- ´:PomodoroStart´: Inicia uma nova sessão Pomodoro.
+- ´:PomodoroStop´: Encerra a sessão atual.
+- ´:PomodoroRemainingTime´: Mostra o tempo atual.
+- ´:PomodoroToggleTimeVisibility´: Alterna entre mostrar sempre e não mostrar o tempo atual.
+- ´:PomodoroSetWorkAndBreak´: Adiciona um tempo personalizado para pausa e trabalho.
 
 ## Além disso, você pode mapear teclas para facilitar o uso dos comandos. Por exemplo:
 
