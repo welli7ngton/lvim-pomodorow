@@ -37,7 +37,6 @@ O lvim-pomodorow fornece os seguintes comandos para gerenciar suas sessões Pomo
 - ´PomodoroRemainingTime´: Mostra o tempo atual.
 - ´PomodoroToggleTimeVisibility´: Alterna entre mostrar sempre e não mostrar o tempo atual.
 - ´PomodoroSetWorkAndBreak´: Adiciona um tempo personalizado para pausa e trabalho.
-- ´PomodoroStart´:
 
 ## Além disso, você pode mapear teclas para facilitar o uso dos comandos. Por exemplo:
 
