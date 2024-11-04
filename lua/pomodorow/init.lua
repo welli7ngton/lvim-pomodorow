@@ -20,7 +20,7 @@ end
 
 function M.start_timer()
   if timer then
-    vim.notify("Timer is running plever", vim.log.levels.INFO)
+    vim.notify("Timer is running", vim.log.levels.INFO)
     return
   end
 
