@@ -47,16 +47,6 @@ vim.api.nvim_set_keymap("n", "<leader>ps", ":PomodoroStart<CR>", { noremap = tru
 vim.api.nvim_set_keymap("n", "<leader>pe", ":PomodoroStop<CR>", { noremap = true, silent = true })
 ```
 
-
-
-
-
-
-
-
-
-
-
-
+[![wakatime](https://wakatime.com/badge/user/dcf0e22a-41eb-4c76-9126-337f24d80641/project/ca36ca7b-c213-494d-bf60-2956cc1457c3.svg)](https://wakatime.com/badge/user/dcf0e22a-41eb-4c76-9126-337f24d80641/project/ca36ca7b-c213-494d-bf60-2956cc1457c3)
 
 
